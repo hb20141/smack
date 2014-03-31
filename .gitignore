@@ -1,0 +1,17 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+target/
+=======
+=======
+>>>>>>> fbc251d924924aa84b5495fcd927e2b2a5ff1f1f
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+.idea/
+<<<<<<< HEAD
+>>>>>>> fbc251d924924aa84b5495fcd927e2b2a5ff1f1f
+=======
+>>>>>>> fbc251d924924aa84b5495fcd927e2b2a5ff1f1f
