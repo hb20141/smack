@@ -58,11 +58,14 @@ public class Message extends Packet {
     private final Set<Body> bodies = new HashSet<Body>();
 
     // custom stanza
-	private String attachmentType = null;
-	private String attachmentId = null;
+    private String attachmentType = null;
+    private String attachmentId = null;
     private String duration = null;
     private String clientId = null;
     private String stamp = null;
+    private String token = null;
+    private String attachmentWidth = null;
+    private String attachmentHeight = null;
 
     /**
      * Creates a new, "normal" message.
@@ -126,7 +129,7 @@ public class Message extends Packet {
     public String getSubject() {
         return getSubject(null);
     }
-    
+
     /**
      * Returns the subject corresponding to the language. If the language is null, the method result
      * will be the same as {@link #getSubject()}. Null will be returned if the language does not have
@@ -139,7 +142,7 @@ public class Message extends Packet {
         Subject subject = getMessageSubject(language);
         return subject == null ? null : subject.subject;
     }
-    
+
     private Subject getMessageSubject(String language) {
         language = determineLanguage(language);
         for (Subject subject : subjects) {
@@ -258,7 +261,7 @@ public class Message extends Packet {
         Body body = getMessageBody(language);
         return body == null ? null : body.message;
     }
-    
+
     private Body getMessageBody(String language) {
         language = determineLanguage(language);
         for (Body body : bodies) {
@@ -394,7 +397,7 @@ public class Message extends Packet {
     }
 
     private String determineLanguage(String language) {
-        
+
         // empty string is passed by #setSubject() and #setBody() and is the same as null
         language = "".equals(language) ? null : language;
 
@@ -408,7 +411,7 @@ public class Message extends Packet {
         else {
             return language;
         }
-        
+
     }
 
     public String toXML() {
@@ -432,9 +435,9 @@ public class Message extends Packet {
         if (type != Type.normal) {
             buf.append(" type=\"").append(type).append("\"");
         }
-		if (getMessageId() != null) {
-			buf.append(" messageid=\"").append(StringUtils.escapeForXML(getMessageId())).append("\"");
-		}
+        if (getMessageId() != null) {
+            buf.append(" messageid=\"").append(StringUtils.escapeForXML(getMessageId())).append("\"");
+        }
         buf.append(">");
         // Add the subject in the default language
         Subject defaultSubject = getMessageSubject(null);
@@ -574,7 +577,7 @@ public class Message extends Packet {
             // simplified comparison because language and subject are always set
             return this.language.equals(other.language) && this.subject.equals(other.subject);
         }
-        
+
     }
 
     /**
@@ -636,7 +639,7 @@ public class Message extends Packet {
             // simplified comparison because language and message are always set
             return this.language.equals(other.language) && this.message.equals(other.message);
         }
-        
+
     }
 
     /**
@@ -680,21 +683,45 @@ public class Message extends Packet {
 
     }
 
-	public void setAttachmentType(String type) {
-		this.attachmentType = type;
-	}
+    public void setAttachmentType(String type) {
+        this.attachmentType = type;
+    }
 
-	public String getAttachmentType() {
-		return this.attachmentType;
-	}
+    public String getAttachmentType() {
+        return this.attachmentType;
+    }
 
-	public void setAttachmentId(String id) {
-		this.attachmentId = id;
-	}
-	
-	public String getAttachmentId() {
-		return this.attachmentId;
-	}
+    public void setAttachmentId(String id) {
+        this.attachmentId = id;
+    }
+
+    public String getAttachmentId() {
+        return this.attachmentId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getAttachmentWidth() {
+        return attachmentWidth;
+    }
+
+    public void setAttachmentWidth(String attachmentWidth) {
+        this.attachmentWidth = attachmentWidth;
+    }
+
+    public String getAttachmentHeight() {
+        return attachmentHeight;
+    }
+
+    public void setAttachmentHeight(String attachmentHeight) {
+        this.attachmentHeight = attachmentHeight;
+    }
 
     public String getDuration() {
         return duration;
